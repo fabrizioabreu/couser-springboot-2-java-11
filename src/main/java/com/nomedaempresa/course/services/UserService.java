@@ -24,7 +24,7 @@ public class UserService {
 		return obj.get();
 	}
 	
-	// Salvar no banco de dados
+	// SALVANDO no banco de dados
 	public User insert(User obj) {
 		return repository.save(obj);
 	}
@@ -32,5 +32,20 @@ public class UserService {
 	// DELETANDO usuario
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+	
+	// ATUALIZANDO usuario
+	public User update(Long id, User obj) {
+		User entity = repository.getOne(id);
+		updateData(entity,obj);
+		return repository.save(entity);
+	}
+
+	// funcao para atualizar usuario
+	private void updateData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+		
 	}
 }
